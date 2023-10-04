@@ -1,0 +1,651 @@
+----------|Roteador Central|----------
+Building configuration...
+
+Current configuration : 1536 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Central
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.50.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ ip address 10.0.0.1 255.255.255.0
+ clock rate 64000
+!
+interface Serial0/1/1
+ ip address 20.0.0.1 255.255.255.0
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+ip route 30.0.0.0 255.255.255.0 10.0.0.2 
+ip route 40.0.0.0 255.255.255.0 10.0.0.2 
+ip route 80.0.0.0 255.255.255.0 10.0.0.2 
+ip route 98.0.0.0 255.255.255.0 10.0.0.2 
+ip route 8.8.8.0 255.255.255.0 10.0.0.2 
+ip route 8.8.4.0 255.255.255.0 10.0.0.2 
+ip route 30.0.0.0 255.255.255.0 20.0.0.2 
+ip route 40.0.0.0 255.255.255.0 20.0.0.2 
+ip route 80.0.0.0 255.255.255.0 20.0.0.2 
+ip route 98.0.0.0 255.255.255.0 20.0.0.2 
+ip route 8.8.8.0 255.255.255.0 20.0.0.2 
+ip route 8.8.4.0 255.255.255.0 20.0.0.2 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+=================================================
+----------|R2|----------
+Building configuration...
+
+Current configuration : 1308 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R2
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 40.0.0.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ ip address 10.0.0.2 255.255.255.0
+!
+interface Serial0/1/1
+ ip address 30.0.0.1 255.255.255.0
+ clock rate 64000
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 192.168.50.0 255.255.255.0 10.0.0.1 
+ip route 20.0.0.0 255.255.255.0 10.0.0.1 
+ip route 80.0.0.0 255.255.255.0 40.0.0.2 
+ip route 98.0.0.0 255.255.255.0 40.0.0.2 
+ip route 8.8.8.0 255.255.255.0 40.0.0.2 
+ip route 8.8.4.0 255.255.255.0 40.0.0.2 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
+----------|R3|----------
+Building configuration...
+
+Current configuration : 1346 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R3
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ ip address 30.0.0.2 255.255.255.0
+!
+interface Serial0/1/1
+ ip address 20.0.0.2 255.255.255.0
+ clock rate 64000
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 10.0.0.0 255.255.255.0 30.0.0.1 
+ip route 40.0.0.0 255.255.255.0 30.0.0.1 
+ip route 192.168.50.0 255.255.255.0 20.0.0.1 
+ip route 10.0.0.0 255.255.255.0 20.0.0.1 
+ip route 80.0.0.0 255.255.255.252 30.0.0.1 
+ip route 98.0.0.0 255.255.255.252 30.0.0.1 
+ip route 8.8.8.0 255.255.255.0 30.0.0.1 
+ip route 8.8.4.0 255.255.255.0 30.0.0.1 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
+----------|border|----------
+Building configuration...
+
+Current configuration : 1299 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname border
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 40.0.0.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ ip address 80.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ ip address 98.0.0.1 255.255.255.252
+ clock rate 64000
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+ip route 10.0.0.0 255.255.255.0 40.0.0.1 
+ip route 30.0.0.0 255.255.255.0 40.0.0.1 
+ip route 8.8.8.0 255.255.255.0 80.0.0.2 
+ip route 8.8.4.0 255.255.255.0 98.0.0.2 
+ip route 192.168.50.0 255.255.255.0 40.0.0.1 
+ip route 20.0.0.0 255.255.255.0 40.0.0.1 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
+----------|ISP1|----------
+Building configuration...
+
+Current configuration : 1095 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ISP1
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 8.8.8.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ ip address 80.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ no ip address
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 40.0.0.0 255.255.255.0 80.0.0.1 
+ip route 98.0.0.0 255.255.255.252 80.0.0.1 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
+----------|ISP2|----------
+Building configuration...
+
+Current configuration : 1085 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ISP2
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 8.8.4.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ ip address 98.0.0.2 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+!
+interface GigabitEthernet0/2/0
+ switchport mode access
+!
+interface GigabitEthernet0/2/1
+ switchport mode access
+!
+interface GigabitEthernet0/2/2
+ switchport mode access
+!
+interface GigabitEthernet0/2/3
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 40.0.0.0 255.255.255.0 98.0.0.1 
+ip route 80.0.0.0 255.255.255.252 98.0.0.1 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
